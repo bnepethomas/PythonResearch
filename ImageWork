@@ -1,0 +1,6 @@
+    if os.path.isfile(image_path + client["mapInfo"]["image"]["imageName"]) == True:
+      file = image_path + client["mapInfo"]["image"]["imageName"]
+      fh = open(file, "rb")
+      image = storeMemory(fh.read()).encode("base64").strip()
+      fh.close()
+    else
