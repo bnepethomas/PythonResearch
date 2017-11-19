@@ -1,6 +1,12 @@
-    if os.path.isfile(image_path + client["mapInfo"]["image"]["imageName"]) == True:
-      file = image_path + client["mapInfo"]["image"]["imageName"]
-      fh = open(file, "rb")
-      image = storeMemory(fh.read()).encode("base64").strip()
-      fh.close()
-    else
+import cgi, requests, json, base64, PIL, re, uuid, os, sys
+
+if os.path.isfile(image_path + client["mapInfo"]["image"]["imageName"]) == True:
+    print("File is here")  
+    file = image_path + client["mapInfo"]["image"]["imageName"]
+    fh = open(file, "rb")
+    image = storeMemory(fh.read()).encode("base64").strip()
+    fh.close()
+else:
+    print("File is not here")
+    
+                
