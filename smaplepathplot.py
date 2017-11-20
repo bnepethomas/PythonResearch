@@ -1,10 +1,20 @@
 import matplotlib.path as mpath
 import matplotlib.patches as mpatches
+import matplotlib.image as image
 import matplotlib.pyplot as plt
 
 import numpy as np
 
+image_path = "./images/"
+image_name = 'FloorPlanCopy.png'
+original_image_name = 'FloorPlanOriginal.png'
+
+im = image.imread(image_path + original_image_name)
+im[1, 1, 1] = 0 # set the alpha channel
+
 fig, ax = plt.subplots()
+
+ax.set_alpha(1)
 
 Path = mpath.Path
 path_data = [
@@ -16,19 +26,24 @@ path_data = [
     (Path.LINETO, (2.2, 3.2)),
     (Path.LINETO, (3, 0.05)),
     (Path.LINETO, (2.0, -0.5)),
-    #(Path.CLOSEPOLY, (1.58, -2.57)),
+    
     ]
 codes, verts = zip(*path_data)
 path = mpath.Path(verts, codes)
-#patch = mpatches.PathPatch(path, facecolor='r', alpha=0.5)
-#ax.add_patch(patch)
 
-# plot control points and connecting lines
-#ax.patch.set_color('r')
-#ax.patch.set_facecolor('r')
+
+
 x, y = zip(*path.vertices)
 line, = ax.plot(x, y, 'go-')
 
-ax.grid()
-ax.axis('equal')
+
+
+fig.figimage(im, 10, 10, zorder=-11)
+
+
+ax.grid('off')
+ax.axis('off')
+
+plt.savefig(image_path + image_name, format='png', dpi=200)
+
 plt.show()
