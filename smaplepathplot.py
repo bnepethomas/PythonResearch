@@ -2,6 +2,7 @@ import matplotlib.path as mpath
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 
+import numpy as np
 
 fig, ax = plt.subplots()
 
@@ -26,7 +27,7 @@ path = mpath.Path(verts, codes)
 #ax.patch.set_color('r')
 #ax.patch.set_facecolor('r')
 x, y = zip(*path.vertices)
-line, = ax.plot(x, y, 'ro-')
+line, = ax.plot(x, y, 'go-')
 
 ax.grid()
 ax.axis('equal')

@@ -20,10 +20,11 @@ np.random.seed()
 
 image_path = "./images/"
 image_name = 'FloorPlanCopy.png'
+original_image_name = 'FloorPlanOriginal.png'
 
-datafile = cbook.get_sample_data('logo2.png', asfileobj=False)
-print('loading %s' % datafile)
-im = image.imread(image_path + image_name)
+im = image.imread(image_path + original_image_name)
+img2=np.ndarray(im.shape)
+
 im[1, 1, 1] = 0 # set the alpha channel
 
 fig, ax = plt.subplots()
@@ -34,5 +35,10 @@ ax.grid()
 fig.figimage(im, 10, 10, zorder=-11)
 
 plt.axis('off')
-plt.savefig(buff, format='png', dpi=500)
+plt.savefig(image_path + image_name, format='png', dpi=200)
+
+
+
+#plt.imsave(image_path + image_name, img2, vmin=None, vmax=None, cmap=None, format=None, origin=None, dpi=100)
+#    imsave(fname, arr, vmin=None, vmax=None, cmap=None, format=None, origin=None, dpi=100)
 plt.show()
