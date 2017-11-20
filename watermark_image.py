@@ -16,7 +16,7 @@ from io import BytesIO
 buff = BytesIO()
 
 # Fixing random state for reproducibility
-np.random.seed(19680801)
+np.random.seed()
 
 image_path = "./images/"
 image_name = 'FloorPlanCopy.png'
@@ -28,7 +28,7 @@ im[1, 1, 1] = 0 # set the alpha channel
 
 fig, ax = plt.subplots()
 plt.scatter(0.5,0.5, facecolor='r', edgecolor='r')
-ax.plot(np.random.rand(20), '-o', ms=20, lw=2, alpha=1, mfc='green')
+ax.plot(np.random.rand(20), '-o', ms=2, lw=2, alpha=1, mfc='green')
 ax.grid()
 # negative z order puts image behind the graph
 fig.figimage(im, 10, 10, zorder=-11)
