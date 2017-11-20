@@ -39,6 +39,11 @@ def main():
 
   macAddress = input("macAddress: ")
   try:
+
+      Path = mpath.Path
+      path_data = [
+          ]
+
       response = requests.get(
       url = restURL1 +"/"+ macAddress,
       auth = HTTPBasicAuth(username,password),
@@ -49,7 +54,7 @@ def main():
       ActCount = json_data["Count"] #actual count could be thousands, ie. 3000
       count = 0
       l = []
-      while (count < 10):
+      while (count < 100):
 
           macAddress= json_data["Macaddress"]
           x = json_data["Data"][count]["x"]
@@ -62,6 +67,12 @@ def main():
           l.append(s)
 
           count = count + 1
+
+          if count == 1:
+            path_data.append((Path.MOVETO, (x, y)))
+          else:
+            path_data.append((Path.LINETO, (x, y)))
+          
 
 
       print("----------------------------------------------------------------")
@@ -80,23 +91,9 @@ def main():
 
       ax.set_alpha(1)
 
-      Path = mpath.Path
-      path_data = [
-          (Path.MOVETO, (100.58, -2.57)),
-          (Path.LINETO, (0.35, -1.1)),
-          (Path.LINETO, (-1.75, 2.0)),
-          (Path.LINETO, (0.375, 2.0)),
-          (Path.LINETO, (0.85, 1.15)),
-          (Path.LINETO, (2.2, 3.2)),
-          (Path.LINETO, (3, 0.05)),
-          (Path.LINETO, (2.0, -0.5)),
-          
-          ]
 
-      path_data.append((Path.LINETO, (20.0, -5)))
-      path_data.append((Path.LINETO, (20.0, 5)))
-      path_data.append((Path.LINETO, (30.0, 5)))
-      path_data.append((Path.LINETO, (30.0, -5)))
+
+
       codes, verts = zip(*path_data)
       path = mpath.Path(verts, codes)
 
